@@ -5,6 +5,7 @@
 
   
   /* Color Variables */
+  /* Brand colors */
   --brand-color-900: #312E81;
   --brand-color-800: #3730A3;
   --brand-color-700: #4338CA;
@@ -15,6 +16,17 @@
   --brand-color-200: #C7D2FE;
   --brand-color-100: #E0E7FF;
   --brand-color-50: #EEF2FF;
+  /* Neutral colors */
+  --neutral-color-900: #111827;
+  --neutral-color-800: #1F2937;
+  --neutral-color-700: #374151;
+  --neutral-color-600: #4B5563;
+  --neutral-color-500: #6B7280;
+  --neutral-color-400: #94A3B8;
+  --neutral-color-300: #CBD5E1;
+  --neutral-color-200: #E5E7EB;
+  --neutral-color-100: #F3F4F6;
+  --neutral-color-50: #F8FAFC;
 
 }
  

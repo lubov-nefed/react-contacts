@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-//import "./MyComponent.css";
+import "./MyContacts.css";
 import { useState } from "react";
 import { Button } from "../Button/Button.jsx";
 
@@ -13,7 +13,7 @@ function ContactInfo({ contact }) {
   return (
     <>
       <section>
-        <h4>ContactInfo</h4>
+        <h4>Contact Info</h4>
         <p>Name: {contact.name}</p>
         <p>Email: {contact.email}</p>
       </section>
@@ -24,40 +24,38 @@ function ContactInfo({ contact }) {
 function ContactsList({ contacts, activeContact, onPick, onEdit, onDelete }) {
   return (
     <section>
-      <h3>ContactsList</h3>
+      <h3>Contacts List</h3>
 
       <ul>
         {contacts.map((contact) => (
           <li
             className="contact-li"
-            key={contact.id}
+            key={contact.name}
             onClick={() => onPick(contact)}
           >
-            <button className={"contact-btn"} onClick={() => onPick(contact)}>
-              {contact.name}
-            </button>
+            {contact.name}
             <span>-----</span>
-            <button
+            <Button
               className={
                 contact.name === activeContact.name
-                  ? "secondary-btn"
-                  : "secondary-btn--inactive"
+                  ? "primary-btn"
+                  : "secondary-btn"
               }
               onClick={onEdit}
             >
               Edit
-            </button>
+            </Button>
             <span>-----</span>
-            <button
+            <Button
               className={
                 contact.name === activeContact.name
-                  ? "secondary-btn"
-                  : "secondary-btn--inactive"
+                  ? "primary-btn"
+                  : "secondary-btn"
               }
-              onClick={() => onDelete(contact)}
+              onClick={(e) => onDelete(e, contact)}
             >
               Delete
-            </button>
+            </Button>
           </li>
         ))}
       </ul>
@@ -68,7 +66,7 @@ function ContactsList({ contacts, activeContact, onPick, onEdit, onDelete }) {
 function ContactEditPreview({ contact }) {
   return (
     <section>
-      <h4>ContactEditPreview</h4>
+      <h4>Contact Editing Preview</h4>
       <p>Name: {contact.name}</p>
       <p>Email: {contact.email}</p>
     </section>
@@ -79,7 +77,7 @@ function ContactEditForm({ contact, onChange, onSubmit, onReset }) {
   return (
     <>
       <form onSubmit={onSubmit} onReset={onReset}>
-        <h4>ContactEditForm</h4>
+        <h4>Contact Editing Form</h4>
         <label htmlFor="name">
           Name:
           <input
@@ -102,13 +100,17 @@ function ContactEditForm({ contact, onChange, onSubmit, onReset }) {
           />
         </label>
         <br />
-        <button type="submit">Save</button>
-        <button type="reset">Reset</button>
+        <Button type={"submit"} className={"primary-btn"}>
+          Save
+        </Button>
+        <Button type={"reset"} className={"secondary-btn"}>
+          Reset
+        </Button>
       </form>
     </>
   );
 }
-function MyComponent() {
+function MyContacts() {
   const [contacts, setContacts] = useState(initialContacts);
   const [activeContact, setActiveContact] = useState(contacts[0]); //{ id: 0, name: "Taylor", email: "taylor@mail.com" }
   const [displayedContact, setDisplayedContact] = useState(contacts[0]); //{ id: 0, name: "Taylor", email: "taylor@mail.com" }
@@ -117,7 +119,7 @@ function MyComponent() {
 
   return (
     <>
-      <h2>MyComponent</h2>
+      <h2>My Contacts</h2>
       {contacts.length !== 0 && (
         <>
           <ContactInfo key={activeContact.name} contact={activeContact} />
@@ -130,7 +132,8 @@ function MyComponent() {
               setFormText(contact);
             }}
             onEdit={() => setIsEditing(true)}
-            onDelete={(contact) => {
+            onDelete={(e, contact) => {
+              e.stopPropagation();
               const newContacts = contacts.filter(
                 (item) => item.name !== contact.name
               );
@@ -188,4 +191,4 @@ function MyComponent() {
   );
 }
 
-export { MyComponent };
+export { MyContacts };

@@ -1,4 +1,5 @@
 button {
+  border-radius: 8px;
   @media screen and (min-width: 1536px) {
     padding: 16px;
     font-size: 16px;
@@ -21,25 +22,42 @@ button {
   }
 }
 
-.primary-button {  
+.primary-btn {  
   color: #fff;
   background-color: var(--brand-color-600);
-  border: none;
-  border-radius: 8px;
-
+  border: 2px solid var(--brand-color-600);
 }
 
-.primary-button:hover {
+.primary-btn:hover {
   background-color: var(--brand-color-700);
+  border: 2px solid var(--brand-color-700);
 }
 
-.primary-button:disabled {
-  color: #94a3b8;
-  background-color: #f1f5f9;
+.primary-btn:disabled {
+  color: var(--neutral-color-400);
+  background-color: var(--neutral-color-100);
 }
 
 
-.primary-button:focus, .primary-button:focus-visible {  
+.primary-btn:focus, .primary-btn:focus-visible {  
+  outline: none;
+  border: 2px solid var(--brand-color-900);
+}
+
+.secondary-btn {
+  background-color: var(--neutral-color-100);
+  border: 2px solid var(--neutral-color-100);
+  color: var(--neutral-color-900);
+}
+.secondary-btn:hover {
+  background-color: var(--neutral-color-200);
+  border: 2px solid var(--neutral-color-200);
+}
+.secondary-btn:disabled {
+  color: var(--neutral-color-400);
+}
+
+.secondary-btn:focus, .secondary-btn:focus-visible {
   outline: none;
   border: 2px solid var(--brand-color-800);
 }
