@@ -1,12 +1,11 @@
 import "./MyContacts.css";
 import { useState } from "react";
 /* import { Button } from "../Button/Button.jsx";
-import { Avatar } from "../Avatar/Avatar.jsx"; */
+import { Avatar } from "../Avatar/Avatar.jsx";*/
 import { ContactsList } from "../ContactsList/ContactsList.jsx";
 import { ContactEditForm } from "../ContactEditForm/ContactEditForm.jsx";
-import { ContactEditPreview } from "../ContactEditPreview/ContactEditPreview.jsx";
-import { ContactInfo } from "../ContactInfo/ContactInfo.jsx";
 import { initialContacts } from "./initialContacts.jsx";
+import { ContactInfo } from "../ContactInfo/ContactInfo.jsx";
 
 function MyContacts() {
   const [contacts, setContacts] = useState(initialContacts);
@@ -20,7 +19,11 @@ function MyContacts() {
       <h2>My Contacts</h2>
       {contacts.length !== 0 && (
         <>
-          <ContactInfo key={activeContact.name} contact={activeContact} />
+          <ContactInfo
+            key={activeContact.name}
+            heading={"Contact Info"}
+            contact={activeContact}
+          />
           <ContactsList
             contacts={contacts}
             activeContact={activeContact}
@@ -57,7 +60,11 @@ function MyContacts() {
 
       {isEditing && (
         <>
-          <ContactEditPreview contact={displayedContact} />
+          <ContactInfo
+            key={activeContact.name}
+            heading={"Contact Info"}
+            contact={displayedContact}
+          />
           <ContactEditForm
             contact={formText}
             onChange={(e, prop) => {
