@@ -62,8 +62,10 @@ function MyContacts() {
         <>
           <ContactInfo
             key={activeContact.name}
-            heading={"Contact Info"}
+            heading={"Contact Editing Preview"}
             contact={displayedContact}
+            type={"edit"}
+            onClose={() => setIsEditing(false)}
           />
           <ContactEditForm
             contact={formText}
