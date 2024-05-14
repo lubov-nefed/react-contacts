@@ -1,9 +1,9 @@
 import "./Avatar.css";
 import taylor from "../../assets/images/avatars/taylor.jpg";
-function Avatar(name, size) {
+function Avatar({ img, size }) {
   return (
     <div className="avatar">
-      <img src={taylor} />
+      <img src={img} />
     </div>
   );
 }

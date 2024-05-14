@@ -1,0 +1,8 @@
+.contact-li:hover {
+  cursor: pointer;
+  background-color: var(--brand-color-100);
+}
+
+.contact-li--active{
+  background-color: var(--brand-color-100);
+}

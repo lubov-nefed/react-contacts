@@ -1,118 +1,13 @@
-/* eslint-disable react/prop-types */
 import "./MyContacts.css";
 import { useState } from "react";
-import { Button } from "../Button/Button.jsx";
-import { Avatar } from "../Avatar/Avatar.jsx";
+/* import { Button } from "../Button/Button.jsx";
+import { Avatar } from "../Avatar/Avatar.jsx"; */
+import { ContactsList } from "../ContactsList/ContactsList.jsx";
+import { ContactEditForm } from "../ContactEditForm/ContactEditForm.jsx";
+import { ContactEditPreview } from "../ContactEditPreview/ContactEditPreview.jsx";
+import { ContactInfo } from "../ContactInfo/ContactInfo.jsx";
+import { initialContacts } from "./initialContacts.jsx";
 
-const initialContacts = [
-  { id: 0, name: "Taylor", email: "taylor@mail.com" },
-  { id: 1, name: "Alice", email: "alice@mail.com" },
-  { id: 2, name: "Bob", email: "bob@mail.com" },
-  { id: 3, name: "Mike", email: "mike@mail.com" },
-];
-
-function ContactInfo({ contact }) {
-  return (
-    <>
-      <section>
-        <h4>Contact Info</h4>
-        <p>Name: {contact.name}</p>
-        <p>Email: {contact.email}</p>
-      </section>
-    </>
-  );
-}
-
-function ContactsList({ contacts, activeContact, onPick, onEdit, onDelete }) {
-  return (
-    <section>
-      <h3>Contacts List</h3>
-
-      <ul>
-        {contacts.map((contact) => (
-          <li
-            className="contact-li"
-            key={contact.name}
-            onClick={() => onPick(contact)}
-          >
-            <Avatar name={"Taylor"} />
-            {contact.name}
-            <span>-----</span>
-            <Button
-              className={
-                contact.name === activeContact.name
-                  ? "primary-btn"
-                  : "secondary-btn"
-              }
-              onClick={onEdit}
-            >
-              Edit
-            </Button>
-            <span>-----</span>
-            <Button
-              className={
-                contact.name === activeContact.name
-                  ? "primary-btn"
-                  : "secondary-btn"
-              }
-              onClick={(e) => onDelete(e, contact)}
-            >
-              Delete
-            </Button>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-function ContactEditPreview({ contact }) {
-  return (
-    <section>
-      <h4>Contact Editing Preview</h4>
-      <p>Name: {contact.name}</p>
-      <p>Email: {contact.email}</p>
-    </section>
-  );
-}
-
-function ContactEditForm({ contact, onChange, onSubmit, onReset }) {
-  return (
-    <>
-      <form onSubmit={onSubmit} onReset={onReset}>
-        <h4>Contact Editing Form</h4>
-        <label htmlFor="name">
-          Name:
-          <input
-            name="name"
-            type="text"
-            value={contact.name}
-            onChange={(e) => onChange(e, "name")}
-            required
-          />
-        </label>
-        <br />
-        <label htmlFor="email">
-          Email:
-          <input
-            name="email"
-            type="text"
-            value={contact.email}
-            onChange={(e) => onChange(e, "email")}
-            required
-          />
-        </label>
-        <br />
-        <Button type={"submit"} className={"primary-btn"}>
-          Save
-        </Button>
-        <Button type={"reset"} className={"secondary-btn"}>
-          Reset
-        </Button>
-      </form>
-    </>
-  );
-}
 function MyContacts() {
   const [contacts, setContacts] = useState(initialContacts);
   const [activeContact, setActiveContact] = useState(contacts[0]); //{ id: 0, name: "Taylor", email: "taylor@mail.com" }
