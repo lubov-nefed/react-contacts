@@ -1,0 +1,56 @@
+:root {
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  
+  /* Color Variables */
+  --brand-color-900: #312E81;
+  --brand-color-800: #3730A3;
+  --brand-color-700: #4338CA;
+  --brand-color-600: #4F46E5;
+  --brand-color-500: #6366f1;
+  --brand-color-400: #818CF8;
+  --brand-color-300: #A5B4FC;
+  --brand-color-200: #C7D2FE;
+  --brand-color-100: #E0E7FF;
+  --brand-color-50: #EEF2FF;
+
+}
+ 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}

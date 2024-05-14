@@ -1,0 +1,45 @@
+button {
+  @media screen and (min-width: 1536px) {
+    padding: 16px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  @media screen and (min-width: 1280px) and (max-width: 1535px) {
+    padding: 10px 16px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  @media screen and (min-width: 1024px) and (max-width: 1279px) {
+    padding: 10px 16px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  @media screen and (max-width: 1023px) {
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.primary-button {  
+  color: #fff;
+  background-color: var(--brand-color-600);
+  border: none;
+  border-radius: 8px;
+
+}
+
+.primary-button:hover {
+  background-color: var(--brand-color-700);
+}
+
+.primary-button:disabled {
+  color: #94a3b8;
+  background-color: #f1f5f9;
+}
+
+
+.primary-button:focus, .primary-button:focus-visible {  
+  outline: none;
+  border: 2px solid var(--brand-color-800);
+}
