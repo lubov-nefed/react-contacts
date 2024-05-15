@@ -6,6 +6,7 @@ import { ContactsList } from "../ContactsList/ContactsList.jsx";
 import { ContactEditForm } from "../ContactEditForm/ContactEditForm.jsx";
 import { initialContacts } from "./initialContacts.jsx";
 import { ContactInfo } from "../ContactInfo/ContactInfo.jsx";
+import { Heading } from "../Heading/Heading.jsx";
 
 function MyContacts() {
   const [contacts, setContacts] = useState(initialContacts);
@@ -16,7 +17,7 @@ function MyContacts() {
 
   return (
     <>
-      <h2>My Contacts</h2>
+      <Heading level={2}>My Contacts</Heading>
       <div className="my-contacts-wrapper">
         {contacts.length !== 0 && (
           <>

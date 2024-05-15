@@ -1,6 +1,7 @@
 import "./ContactInfo.css";
 import { Avatar } from "../Avatar/Avatar.jsx";
 import { Button } from "../Button/Button.jsx";
+import { Heading } from "../Heading/Heading.jsx";
 
 function ContactInfo({
   type = "display",
@@ -16,7 +17,7 @@ function ContactInfo({
           Close
         </Button>
       )}
-      <h4>{heading}</h4>
+      <Heading level={4}>{heading}</Heading>
       <Avatar img={contact.img} />
       <p>Name: {contact.name}</p>
       <p>Email: {contact.email}</p>

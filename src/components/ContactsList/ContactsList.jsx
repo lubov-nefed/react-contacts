@@ -2,6 +2,7 @@ import "./ContactsList.css";
 import { useState } from "react";
 import { Avatar } from "../Avatar/Avatar.jsx";
 import { Button } from "../Button/Button.jsx";
+import { Heading } from "../Heading/Heading.jsx";
 
 function ContactsList({
   contacts,
@@ -13,8 +14,7 @@ function ContactsList({
 }) {
   return (
     <section className={className}>
-      <h3>Contacts List</h3>
-
+      <Heading level={4}>Contacts List</Heading>
       <ul>
         {contacts.map((contact) => (
           <li

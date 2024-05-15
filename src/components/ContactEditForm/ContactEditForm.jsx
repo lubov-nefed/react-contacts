@@ -1,11 +1,12 @@
 import "./ContactEditForm.css";
 import { Button } from "../Button/Button.jsx";
+import { Heading } from "../Heading/Heading.jsx";
 
 function ContactEditForm({ contact, onChange, onSubmit, onReset, className }) {
   return (
     <>
       <form onSubmit={onSubmit} onReset={onReset} className={className}>
-        <h4>Contact Editing Form</h4>
+        <Heading level={4}>Contact Editing Form</Heading>
         <label htmlFor="name">
           Name:
           <input
