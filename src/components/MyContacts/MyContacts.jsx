@@ -43,6 +43,7 @@ function MyContacts() {
                 setContacts(newContacts);
                 setActiveContact(newContacts[0]);
               }}
+              className={"section contacts-list"}
             />
           </>
         )}
@@ -94,6 +95,7 @@ function MyContacts() {
               onReset={() => {
                 setFormText({ ...formText, name: "", email: "" });
               }}
+              className={"section"}
             />
           </>
         )}

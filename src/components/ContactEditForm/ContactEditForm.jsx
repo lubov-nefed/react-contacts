@@ -1,10 +1,10 @@
 import "./ContactEditForm.css";
 import { Button } from "../Button/Button.jsx";
 
-function ContactEditForm({ contact, onChange, onSubmit, onReset }) {
+function ContactEditForm({ contact, onChange, onSubmit, onReset, className }) {
   return (
     <>
-      <form onSubmit={onSubmit} onReset={onReset}>
+      <form onSubmit={onSubmit} onReset={onReset} className={className}>
         <h4>Contact Editing Form</h4>
         <label htmlFor="name">
           Name:

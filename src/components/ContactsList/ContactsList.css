@@ -1,3 +1,6 @@
+.contacts-list {
+  grid-row-start: 2;
+}
 .contact-li:hover {
   cursor: pointer;
   background-color: var(--brand-color-100);

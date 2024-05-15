@@ -1,9 +1,9 @@
 .my-contacts-wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* grid-template-rows: repeat(2, 1fr); */
 }
 .section {
   padding: 16px 8px;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border: solid 1px var(--neutral-color-100);
+  background-color: #fff;
 }

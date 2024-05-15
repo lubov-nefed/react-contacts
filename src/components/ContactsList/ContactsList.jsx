@@ -3,9 +3,16 @@ import { useState } from "react";
 import { Avatar } from "../Avatar/Avatar.jsx";
 import { Button } from "../Button/Button.jsx";
 
-function ContactsList({ contacts, activeContact, onPick, onEdit, onDelete }) {
+function ContactsList({
+  contacts,
+  activeContact,
+  onPick,
+  onEdit,
+  onDelete,
+  className,
+}) {
   return (
-    <section>
+    <section className={className}>
       <h3>Contacts List</h3>
 
       <ul>
