@@ -14,7 +14,9 @@ function ContactsList({
 }) {
   return (
     <section className={className}>
-      <Heading level={4}>Contacts List</Heading>
+      <Heading level={4} className={"section-heading"}>
+        Contacts List
+      </Heading>
       <ul>
         {contacts.map((contact) => (
           <li

@@ -17,7 +17,9 @@ function MyContacts() {
 
   return (
     <>
-      <Heading level={2}>My Contacts</Heading>
+      <Heading level={2} className={"section-heading"}>
+        My Contacts
+      </Heading>
       <div className="my-contacts-wrapper">
         {contacts.length !== 0 && (
           <>
@@ -66,7 +68,7 @@ function MyContacts() {
           <>
             <ContactInfo
               key={activeContact.name}
-              heading={"Contact Editing Preview"}
+              heading={"Edit Contact"}
               contact={displayedContact}
               type={"edit"}
               onClose={() => setIsEditing(false)}

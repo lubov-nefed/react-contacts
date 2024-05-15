@@ -17,7 +17,9 @@ function ContactInfo({
           Close
         </Button>
       )}
-      <Heading level={4}>{heading}</Heading>
+      <Heading level={4} className={"section-heading"}>
+        {heading}
+      </Heading>
       <Avatar img={contact.img} />
       <p>Name: {contact.name}</p>
       <p>Email: {contact.email}</p>
