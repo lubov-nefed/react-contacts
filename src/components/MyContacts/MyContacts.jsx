@@ -17,83 +17,87 @@ function MyContacts() {
   return (
     <>
       <h2>My Contacts</h2>
-      {contacts.length !== 0 && (
-        <>
-          <ContactInfo
-            key={activeContact.name}
-            heading={"Contact Info"}
-            contact={activeContact}
-          />
-          <ContactsList
-            contacts={contacts}
-            activeContact={activeContact}
-            onPick={(contact) => {
-              setActiveContact(contact);
-              setDisplayedContact(contact);
-              setFormText(contact);
-            }}
-            onEdit={() => setIsEditing(true)}
-            onDelete={(e, contact) => {
-              e.stopPropagation();
-              const newContacts = contacts.filter(
-                (item) => item.name !== contact.name
-              );
-              setContacts(newContacts);
-              setActiveContact(newContacts[0]);
-            }}
-          />
-        </>
-      )}
-      {contacts.length === 0 && (
-        <>
-          <p>Contacts List is empty.</p>
-          <button
-            onClick={() => {
-              setContacts(initialContacts);
-              setActiveContact(initialContacts[0]);
-            }}
-          >
-            Reset List
-          </button>
-        </>
-      )}
+      <div className="my-contacts-wrapper">
+        {contacts.length !== 0 && (
+          <>
+            <ContactInfo
+              key={activeContact.name}
+              heading={"Contact Info"}
+              contact={activeContact}
+              className={"section contact-info"}
+            />
+            <ContactsList
+              contacts={contacts}
+              activeContact={activeContact}
+              onPick={(contact) => {
+                setActiveContact(contact);
+                setDisplayedContact(contact);
+                setFormText(contact);
+              }}
+              onEdit={() => setIsEditing(true)}
+              onDelete={(e, contact) => {
+                e.stopPropagation();
+                const newContacts = contacts.filter(
+                  (item) => item.name !== contact.name
+                );
+                setContacts(newContacts);
+                setActiveContact(newContacts[0]);
+              }}
+            />
+          </>
+        )}
+        {contacts.length === 0 && (
+          <>
+            <p>Contacts List is empty.</p>
+            <button
+              onClick={() => {
+                setContacts(initialContacts);
+                setActiveContact(initialContacts[0]);
+              }}
+            >
+              Reset List
+            </button>
+          </>
+        )}
 
-      {isEditing && (
-        <>
-          <ContactInfo
-            key={activeContact.name}
-            heading={"Contact Editing Preview"}
-            contact={displayedContact}
-            type={"edit"}
-            onClose={() => setIsEditing(false)}
-          />
-          <ContactEditForm
-            contact={formText}
-            onChange={(e, prop) => {
-              setFormText({ ...formText, [prop]: e.target.value });
-              setDisplayedContact({
-                ...displayedContact,
-                [prop]: e.target.value,
-              });
-            }}
-            onSubmit={(e) => {
-              e.preventDefault();
-              setContacts(
-                contacts.map((contact) => {
-                  if (formText.id === contact.id) {
-                    return formText;
-                  } else return contact;
-                })
-              );
-              setActiveContact(formText);
-              setIsEditing(false);
-            }}
-            onReset={() => {
-              setFormText({ ...formText, name: "", email: "" });
-            }}
-          />
-        </>
-      )}
+        {isEditing && (
+          <>
+            <ContactInfo
+              key={activeContact.name}
+              heading={"Contact Editing Preview"}
+              contact={displayedContact}
+              type={"edit"}
+              onClose={() => setIsEditing(false)}
+              className={"section contact-edit-info"}
+            />
+            <ContactEditForm
+              contact={formText}
+              onChange={(e, prop) => {
+                setFormText({ ...formText, [prop]: e.target.value });
+                setDisplayedContact({
+                  ...displayedContact,
+                  [prop]: e.target.value,
+                });
+              }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                setContacts(
+                  contacts.map((contact) => {
+                    if (formText.id === contact.id) {
+                      return formText;
+                    } else return contact;
+                  })
+                );
+                setActiveContact(formText);
+                setIsEditing(false);
+              }}
+              onReset={() => {
+                setFormText({ ...formText, name: "", email: "" });
+              }}
+            />
+          </>
+        )}
+      </div>
     </>
   );
 }

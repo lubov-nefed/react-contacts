@@ -2,9 +2,15 @@ import "./ContactInfo.css";
 import { Avatar } from "../Avatar/Avatar.jsx";
 import { Button } from "../Button/Button.jsx";
 
-function ContactInfo({ type = "display", heading, contact, onClose }) {
+function ContactInfo({
+  type = "display",
+  heading,
+  contact,
+  onClose,
+  className = "section",
+}) {
   return (
-    <section>
+    <section className={className}>
       {type === "edit" && (
         <Button className={"primary-btn"} onClick={onClose}>
           Close
