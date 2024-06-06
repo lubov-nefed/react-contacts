@@ -6,9 +6,6 @@ function ContactEditForm({ contact, onChange, onSubmit, onReset, className }) {
   return (
     <>
       <form onSubmit={onSubmit} onReset={onReset} className={className}>
-        {/*  <Heading level={4} className={"section-heading"}>
-          Contact Editing Form
-        </Heading> */}
         <label htmlFor="name">
           Name:
           <input

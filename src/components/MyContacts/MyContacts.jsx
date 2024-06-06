@@ -7,6 +7,7 @@ import { ContactEditForm } from "../ContactEditForm/ContactEditForm.jsx";
 import { initialContacts } from "./initialContacts.jsx";
 import { ContactInfo } from "../ContactInfo/ContactInfo.jsx";
 import { Heading } from "../Heading/Heading.jsx";
+import { ContactEdit } from "../Button/ContactEdit/ContactEdit.jsx";
 
 function MyContacts() {
   const [contacts, setContacts] = useState(initialContacts);
@@ -65,14 +66,14 @@ function MyContacts() {
         )}
 
         {isEditing && (
-          <>
+          <ContactEdit className={"section"}>
             <ContactInfo
               key={activeContact.name}
               heading={"Edit Contact"}
               contact={displayedContact}
               type={"edit"}
               onClose={() => setIsEditing(false)}
-              className={"section contact-edit-info"}
+              className={"contact-edit-info"}
             />
             <ContactEditForm
               contact={formText}
@@ -98,9 +99,8 @@ function MyContacts() {
               onReset={() => {
                 setFormText({ ...formText, name: "", email: "" });
               }}
-              className={"section"}
             />
-          </>
+          </ContactEdit>
         )}
       </div>
     </>
