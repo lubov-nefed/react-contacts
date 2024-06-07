@@ -1,5 +1,4 @@
 import "./ContactsList.css";
-import { useState } from "react";
 import { Avatar } from "../Avatar/Avatar.jsx";
 import { Button } from "../Button/Button.jsx";
 import { Heading } from "../Heading/Heading.jsx";
@@ -14,9 +13,6 @@ function ContactsList({
 }) {
   return (
     <section className={className}>
-      <Heading level={4} className={"section-heading"}>
-        Contacts List
-      </Heading>
       <ul>
         {contacts.map((contact) => (
           <li
