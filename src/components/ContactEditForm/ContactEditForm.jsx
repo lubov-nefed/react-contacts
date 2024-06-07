@@ -1,6 +1,5 @@
 import "./ContactEditForm.css";
 import { Button } from "../Button/Button.jsx";
-import { Heading } from "../Heading/Heading.jsx";
 
 function ContactEditForm({ contact, onChange, onSubmit, onReset, className }) {
   return (
@@ -10,7 +9,6 @@ function ContactEditForm({ contact, onChange, onSubmit, onReset, className }) {
           Name:
           <input
             name="name"
-            type="text"
             value={contact.name}
             onChange={(e) => onChange(e, "name")}
             required
@@ -21,9 +19,18 @@ function ContactEditForm({ contact, onChange, onSubmit, onReset, className }) {
           Email:
           <input
             name="email"
-            type="text"
             value={contact.email}
             onChange={(e) => onChange(e, "email")}
+            required
+          />
+        </label>
+        <br />
+        <label htmlFor="phone">
+          Phone Number:
+          <input
+            name="phone"
+            value={contact.phone}
+            onChange={(e) => onChange(e, "phone")}
             required
           />
         </label>

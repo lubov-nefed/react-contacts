@@ -1,20 +1,21 @@
 import "./MyContacts.css";
 import { useState } from "react";
-/* import { Button } from "../Button/Button.jsx";
-import { Avatar } from "../Avatar/Avatar.jsx";*/
 import { ContactsList } from "../ContactsList/ContactsList.jsx";
 import { ContactEditForm } from "../ContactEditForm/ContactEditForm.jsx";
 import { initialContacts } from "./initialContacts.jsx";
 import { ContactInfo } from "../ContactInfo/ContactInfo.jsx";
 import { Heading } from "../Heading/Heading.jsx";
+import { Button } from "../Button/Button.jsx";
 import { ContactEdit } from "../ContactEdit/ContactEdit.jsx";
+import { ContactForm } from "../ContactForm/ContactForm.jsx";
 
 function MyContacts() {
   const [contacts, setContacts] = useState(initialContacts);
-  const [activeContact, setActiveContact] = useState(contacts[0]); //{ id: 0, name: "Taylor", email: "taylor@mail.com" }
-  const [displayedContact, setDisplayedContact] = useState(contacts[0]); //{ id: 0, name: "Taylor", email: "taylor@mail.com" }
+  const [activeContact, setActiveContact] = useState(contacts[0]);
+  const [displayedContact, setDisplayedContact] = useState(contacts[0]);
   const [formText, setFormText] = useState(contacts[0]);
   const [isEditing, setIsEditing] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   return (
     <>
@@ -65,12 +66,13 @@ function MyContacts() {
         )}
 
         {isEditing && (
-          <ContactEdit className={"section"}>
+          <ContactEdit
+            className={"section contact-edit"}
+            onClose={() => setIsEditing(false)}
+          >
             <ContactInfo
               key={activeContact.name}
               contact={displayedContact}
-              type={"edit"}
-              onClose={() => setIsEditing(false)}
               className={"contact-edit-info"}
             />
             <ContactEditForm
@@ -98,8 +100,47 @@ function MyContacts() {
                 setFormText({ ...formText, name: "", email: "" });
               }}
             />
+
+            <ContactForm
+              type={"edit"}
+              activeContact={activeContact}
+              onSubmit={(e) => {
+                e.preventDefault();
+                setContacts(
+                  contacts.map((contact) => {
+                    if (formText.id === contact.id) {
+                      return formText;
+                    } else return contact;
+                  })
+                );
+                setActiveContact(formText);
+                setIsEditing(false);
+              }}
+              onReset={() => {
+                setFormText({ ...formText, name: "", email: "" });
+              }}
+            />
           </ContactEdit>
         )}
+        {isAdding && (
+          <ContactEdit onClose={() => setIsAdding(false)}>
+            <ContactForm type={"add"} />
+          </ContactEdit>
+        )}
+        <Button
+          className={"primary-btn add-contact-btn"}
+          isDisabled={isAdding}
+          onClick={() => {
+            if (isEditing) {
+              setIsEditing(false);
+            }
+            if (!isAdding) {
+              setIsAdding(true);
+            }
+          }}
+        >
+          Add New Contact
+        </Button>
       </div>
     </>
   );

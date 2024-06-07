@@ -1,9 +1,18 @@
 .my-contacts-wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 2fr .5fr;
+  gap: 8px;
 }
 .section {
   padding: 16px 8px;
   border: solid 1px var(--neutral-color-100);
   background-color: #fff;
+  border-radius: 4px;
+}
+
+.add-contact-btn {
+  grid-row-start: 3;
+  justify-self: center;
+  align-self: center;
 }
