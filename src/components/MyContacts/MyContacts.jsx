@@ -7,18 +7,22 @@ import { Heading } from "../Heading/Heading.jsx";
 import { Button } from "../Button/Button.jsx";
 import { ContactEdit } from "../ContactEdit/ContactEdit.jsx";
 import { ContactForm } from "../ContactForm/ContactForm.jsx";
+import brand700 from "../../assets/images/avatars/brand-700-color.svg";
 
 function MyContacts() {
-  const [contacts, setContacts] = useState(initialContacts);
-  const [activeContact, setActiveContact] = useState(contacts[0]);
-  const [displayedContact, setDisplayedContact] = useState(contacts[0]);
-  const [editFormText, setEditFormText] = useState(contacts[0]);
-  const [newContact, setNewContact] = useState({
+  const emptyContact = {
     id: "",
     name: "",
     email: "",
     phone: "",
-  });
+    img: "",
+  };
+  const [contacts, setContacts] = useState(initialContacts);
+  const [activeContact, setActiveContact] = useState(contacts[0]);
+  const [displayedContact, setDisplayedContact] = useState(contacts[0]);
+  const [editFormText, setEditFormText] = useState(contacts[0]);
+  const [addFormText, setAddFormText] = useState(emptyContact);
+  const [newContact, setNewContact] = useState(emptyContact);
   const [mode, setMode] = useState("watch"); //edit, add
 
   return (
@@ -27,7 +31,7 @@ function MyContacts() {
         My Contacts
       </Heading>
       <div className="my-contacts-wrapper">
-        {contacts.length !== 0 && (
+        {contacts.length > 0 && (
           <>
             <ContactInfo
               key={activeContact.name}
@@ -86,8 +90,8 @@ function MyContacts() {
             />
 
             <ContactForm
-              type={"edit"}
-              activeContact={editFormText}
+              type={mode}
+              formText={editFormText}
               onChange={(e, prop) => {
                 setEditFormText({ ...editFormText, [prop]: e.target.value });
                 setDisplayedContact({
@@ -121,15 +125,21 @@ function MyContacts() {
         {mode === "add" && (
           <ContactEdit className={"section"} onClose={() => setMode("watch")}>
             <ContactForm
-              type={"add"}
-              activeContact={newContact}
+              type={mode}
+              formText={addFormText}
               onChange={(e, prop) => {
-                setNewContact({ ...newContact, [prop]: e.target.value });
+                setAddFormText({ ...addFormText, [prop]: e.target.value });
+                setNewContact({
+                  ...newContact,
+                  [prop]: e.target.value,
+                  id: crypto.randomUUID(), //будет меняться при каждом вводимом символе - это плохо, можно наверное как-то кэшировать с memo
+                  img: brand700, //кэшировать
+                });
               }}
               onSubmit={(e) => {
                 e.preventDefault();
-                newContact.id = crypto.randomUUID();
                 setContacts([...contacts, newContact]);
+                setAddFormText(emptyContact);
                 setMode("watch");
               }}
             />

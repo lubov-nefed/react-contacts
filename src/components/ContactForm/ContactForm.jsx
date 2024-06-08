@@ -1,8 +1,10 @@
 import "./ContactForm.css";
 import { Button } from "../Button/Button.jsx";
 import { Input } from "../Input/Input.jsx";
+//import { useState } from "react";
 
-function ContactForm({ onSubmit, onReset, type, activeContact, onChange }) {
+function ContactForm({ onSubmit, onReset, type, formText, onChange }) {
+  //const [contactsAdded, setContactsAdded] = useState(0);
   return (
     <form onSubmit={onSubmit} onReset={onReset}>
       {type === "edit" && (
@@ -10,21 +12,21 @@ function ContactForm({ onSubmit, onReset, type, activeContact, onChange }) {
           <Input
             htmlFor={"name"}
             labelText={"Name:"}
-            value={activeContact.name}
+            value={formText.name}
             onChange={onChange}
           />
           <br />
           <Input
             htmlFor={"email"}
             labelText={"Email:"}
-            value={activeContact.email}
+            value={formText.email}
             onChange={onChange}
           />
           <br />
           <Input
             htmlFor={"phone"}
             labelText={"Phone Number:"}
-            value={activeContact.phone}
+            value={formText.phone}
             onChange={onChange}
           />
         </>
@@ -35,21 +37,21 @@ function ContactForm({ onSubmit, onReset, type, activeContact, onChange }) {
             htmlFor={"name"}
             labelText={"Name:"}
             onChange={onChange}
-            value={activeContact.name}
+            value={formText.name}
           />
           <br />
           <Input
             htmlFor={"email"}
             labelText={"Email:"}
             onChange={onChange}
-            value={activeContact.email}
+            value={formText.email}
           />
           <br />
           <Input
             htmlFor={"phone"}
             labelText={"Phone Number:"}
             onChange={onChange}
-            value={activeContact.phone}
+            value={formText.phone}
           />
         </>
       )}
