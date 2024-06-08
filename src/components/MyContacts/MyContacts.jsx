@@ -1,7 +1,6 @@
 import "./MyContacts.css";
 import { useState } from "react";
 import { ContactsList } from "../ContactsList/ContactsList.jsx";
-import { ContactEditForm } from "../ContactEditForm/ContactEditForm.jsx";
 import { initialContacts } from "./initialContacts.jsx";
 import { ContactInfo } from "../ContactInfo/ContactInfo.jsx";
 import { Heading } from "../Heading/Heading.jsx";
@@ -13,9 +12,14 @@ function MyContacts() {
   const [contacts, setContacts] = useState(initialContacts);
   const [activeContact, setActiveContact] = useState(contacts[0]);
   const [displayedContact, setDisplayedContact] = useState(contacts[0]);
-  const [formText, setFormText] = useState(contacts[0]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
+  const [editFormText, setEditFormText] = useState(contacts[0]);
+  const [newContact, setNewContact] = useState({
+    id: "",
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const [mode, setMode] = useState("watch"); //edit, add
 
   return (
     <>
@@ -36,11 +40,16 @@ function MyContacts() {
               onPick={(contact) => {
                 setActiveContact(contact);
                 setDisplayedContact(contact);
-                setFormText(contact);
+                setEditFormText(contact);
               }}
-              onEdit={() => setIsEditing(true)}
+              onEdit={() => {
+                setMode("edit");
+              }}
               onDelete={(e, contact) => {
                 e.stopPropagation();
+                if (mode === "edit") {
+                  setMode("watch");
+                }
                 const newContacts = contacts.filter(
                   (item) => item.name !== contact.name
                 );
@@ -65,20 +74,22 @@ function MyContacts() {
           </>
         )}
 
-        {isEditing && (
+        {mode === "edit" && (
           <ContactEdit
             className={"section contact-edit"}
-            onClose={() => setIsEditing(false)}
+            onClose={() => setMode("watch")}
           >
             <ContactInfo
               key={activeContact.name}
               contact={displayedContact}
               className={"contact-edit-info"}
             />
-            <ContactEditForm
-              contact={formText}
+
+            <ContactForm
+              type={"edit"}
+              activeContact={editFormText}
               onChange={(e, prop) => {
-                setFormText({ ...formText, [prop]: e.target.value });
+                setEditFormText({ ...editFormText, [prop]: e.target.value });
                 setDisplayedContact({
                   ...displayedContact,
                   [prop]: e.target.value,
@@ -88,55 +99,47 @@ function MyContacts() {
                 e.preventDefault();
                 setContacts(
                   contacts.map((contact) => {
-                    if (formText.id === contact.id) {
-                      return formText;
+                    if (editFormText.id === contact.id) {
+                      return editFormText;
                     } else return contact;
                   })
                 );
-                setActiveContact(formText);
-                setIsEditing(false);
+                setActiveContact(editFormText);
+                setMode("watch");
               }}
               onReset={() => {
-                setFormText({ ...formText, name: "", email: "" });
-              }}
-            />
-
-            <ContactForm
-              type={"edit"}
-              activeContact={activeContact}
-              onSubmit={(e) => {
-                e.preventDefault();
-                setContacts(
-                  contacts.map((contact) => {
-                    if (formText.id === contact.id) {
-                      return formText;
-                    } else return contact;
-                  })
-                );
-                setActiveContact(formText);
-                setIsEditing(false);
-              }}
-              onReset={() => {
-                setFormText({ ...formText, name: "", email: "" });
+                setEditFormText({
+                  ...editFormText,
+                  name: "",
+                  email: "",
+                  phone: "",
+                });
               }}
             />
           </ContactEdit>
         )}
-        {isAdding && (
-          <ContactEdit onClose={() => setIsAdding(false)}>
-            <ContactForm type={"add"} />
+        {mode === "add" && (
+          <ContactEdit className={"section"} onClose={() => setMode("watch")}>
+            <ContactForm
+              type={"add"}
+              activeContact={newContact}
+              onChange={(e, prop) => {
+                setNewContact({ ...newContact, [prop]: e.target.value });
+              }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                newContact.id = crypto.randomUUID();
+                setContacts([...contacts, newContact]);
+                setMode("watch");
+              }}
+            />
           </ContactEdit>
         )}
         <Button
           className={"primary-btn add-contact-btn"}
-          isDisabled={isAdding}
+          isDisabled={mode === "add"}
           onClick={() => {
-            if (isEditing) {
-              setIsEditing(false);
-            }
-            if (!isAdding) {
-              setIsAdding(true);
-            }
+            setMode("add");
           }}
         >
           Add New Contact

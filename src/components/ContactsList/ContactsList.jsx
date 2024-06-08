@@ -1,7 +1,6 @@
 import "./ContactsList.css";
 import { Avatar } from "../Avatar/Avatar.jsx";
 import { Button } from "../Button/Button.jsx";
-import { Heading } from "../Heading/Heading.jsx";
 
 function ContactsList({
   contacts,
@@ -21,7 +20,7 @@ function ContactsList({
                 ? "contact-li--active"
                 : "contact-li"
             }
-            key={contact.name}
+            key={contact.id}
             onClick={() => onPick(contact)}
           >
             <Avatar img={contact.img} />

@@ -15,7 +15,7 @@ function Input({
         name={htmlFor}
         type={type}
         value={value}
-        onChange={onChange}
+        onChange={(e) => onChange(e, htmlFor)}
         required={required}
       />
     </label>

@@ -31,7 +31,26 @@ function ContactForm({ onSubmit, onReset, type, activeContact, onChange }) {
       )}
       {type === "add" && (
         <>
-          <Input htmlFor={"name"} labelText={"Name:"} onChange={onChange} />
+          <Input
+            htmlFor={"name"}
+            labelText={"Name:"}
+            onChange={onChange}
+            value={activeContact.name}
+          />
+          <br />
+          <Input
+            htmlFor={"email"}
+            labelText={"Email:"}
+            onChange={onChange}
+            value={activeContact.email}
+          />
+          <br />
+          <Input
+            htmlFor={"phone"}
+            labelText={"Phone Number:"}
+            onChange={onChange}
+            value={activeContact.phone}
+          />
         </>
       )}
       <br />
