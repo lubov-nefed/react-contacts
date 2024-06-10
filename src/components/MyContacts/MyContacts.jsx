@@ -20,9 +20,7 @@ function MyContacts() {
   const [contacts, setContacts] = useState(initialContacts);
   const [activeContact, setActiveContact] = useState(contacts[0]);
   const [displayedContact, setDisplayedContact] = useState(contacts[0]);
-  const [editFormText, setEditFormText] = useState(contacts[0]);
-  const [addFormText, setAddFormText] = useState(emptyContact);
-  const [newContact, setNewContact] = useState(emptyContact);
+  const [formText, setFormText] = useState(emptyContact);
   const [mode, setMode] = useState("watch"); //edit, add
 
   return (
@@ -39,12 +37,13 @@ function MyContacts() {
               className={"section contact-info"}
             />
             <ContactsList
+              className={"section contacts-list"}
               contacts={contacts}
               activeContact={activeContact}
               onPick={(contact) => {
                 setActiveContact(contact);
                 setDisplayedContact(contact);
-                setEditFormText(contact);
+                setFormText(contact);
               }}
               onEdit={() => {
                 setMode("edit");
@@ -60,7 +59,6 @@ function MyContacts() {
                 setContacts(newContacts);
                 setActiveContact(newContacts[0]);
               }}
-              className={"section contacts-list"}
             />
           </>
         )}
@@ -91,9 +89,9 @@ function MyContacts() {
 
             <ContactForm
               type={mode}
-              formText={editFormText}
+              formText={formText}
               onChange={(e, prop) => {
-                setEditFormText({ ...editFormText, [prop]: e.target.value });
+                setFormText({ ...formText, [prop]: e.target.value });
                 setDisplayedContact({
                   ...displayedContact,
                   [prop]: e.target.value,
@@ -103,17 +101,17 @@ function MyContacts() {
                 e.preventDefault();
                 setContacts(
                   contacts.map((contact) => {
-                    if (editFormText.id === contact.id) {
-                      return editFormText;
+                    if (formText.id === contact.id) {
+                      return formText;
                     } else return contact;
                   })
                 );
-                setActiveContact(editFormText);
+                setActiveContact(formText);
                 setMode("watch");
               }}
               onReset={() => {
-                setEditFormText({
-                  ...editFormText,
+                setFormText({
+                  ...formText,
                   name: "",
                   email: "",
                   phone: "",
@@ -126,20 +124,17 @@ function MyContacts() {
           <ContactEdit className={"section"} onClose={() => setMode("watch")}>
             <ContactForm
               type={mode}
-              formText={addFormText}
+              formText={formText}
               onChange={(e, prop) => {
-                setAddFormText({ ...addFormText, [prop]: e.target.value });
-                setNewContact({
-                  ...newContact,
-                  [prop]: e.target.value,
-                  id: crypto.randomUUID(), //будет меняться при каждом вводимом символе - это плохо, можно наверное как-то кэшировать с memo
-                  img: brand700, //кэшировать
-                });
+                setFormText({ ...formText, [prop]: e.target.value });
               }}
               onSubmit={(e) => {
                 e.preventDefault();
-                setContacts([...contacts, newContact]);
-                setAddFormText(emptyContact);
+                setContacts([
+                  ...contacts,
+                  { ...formText, id: crypto.randomUUID(), img: brand700 },
+                ]);
+                setFormText(emptyContact);
                 setMode("watch");
               }}
             />
@@ -149,6 +144,7 @@ function MyContacts() {
           className={"primary-btn add-contact-btn"}
           isDisabled={mode === "add"}
           onClick={() => {
+            setFormText(emptyContact);
             setMode("add");
           }}
         >
