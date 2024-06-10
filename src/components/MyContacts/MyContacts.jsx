@@ -32,7 +32,7 @@ function MyContacts() {
         {contacts.length > 0 && (
           <>
             <ContactInfo
-              key={activeContact.name}
+              key={activeContact.id}
               contact={activeContact}
               className={"section contact-info"}
             />
@@ -66,6 +66,7 @@ function MyContacts() {
           <>
             <p>Contacts List is empty.</p>
             <button
+              className={"primary-btn"}
               onClick={() => {
                 setContacts(initialContacts);
                 setActiveContact(initialContacts[0]);
@@ -130,10 +131,14 @@ function MyContacts() {
               }}
               onSubmit={(e) => {
                 e.preventDefault();
-                setContacts([
-                  ...contacts,
-                  { ...formText, id: crypto.randomUUID(), img: brand700 },
-                ]);
+                const id = crypto.randomUUID();
+                contacts.length
+                  ? setContacts([
+                      ...contacts,
+                      { ...formText, id: id, img: brand700 },
+                    ])
+                  : setContacts([{ ...formText, id: id, img: brand700 }]);
+                setActiveContact({ ...formText, id: id, img: brand700 });
                 setFormText(emptyContact);
                 setMode("watch");
               }}
