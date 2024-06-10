@@ -1,5 +1,6 @@
 .contacts-list {
   grid-row-start: 2;
+  overflow-y: scroll;
 }
 .contact-li:hover {
   cursor: pointer;

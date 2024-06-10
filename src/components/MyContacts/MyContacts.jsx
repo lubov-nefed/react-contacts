@@ -7,7 +7,10 @@ import { Heading } from "../Heading/Heading.jsx";
 import { Button } from "../Button/Button.jsx";
 import { ContactEdit } from "../ContactEdit/ContactEdit.jsx";
 import { ContactForm } from "../ContactForm/ContactForm.jsx";
-import brand700 from "../../assets/images/avatars/brand-700-color.svg";
+import brandColor400 from "../../assets/images/avatars/brand-400-color.svg";
+import brandColor500 from "../../assets/images/avatars/brand-500-color.svg";
+import brandColor600 from "../../assets/images/avatars/brand-600-color.svg";
+import brandColor700 from "../../assets/images/avatars/brand-700-color.svg";
 
 function MyContacts() {
   const emptyContact = {
@@ -22,6 +25,7 @@ function MyContacts() {
   const [displayedContact, setDisplayedContact] = useState(contacts[0]);
   const [formText, setFormText] = useState(emptyContact);
   const [mode, setMode] = useState("watch"); //edit, add
+  const [contactsAdded, setContactsAdded] = useState(0);
 
   return (
     <>
@@ -83,7 +87,7 @@ function MyContacts() {
             onClose={() => setMode("watch")}
           >
             <ContactInfo
-              key={activeContact.name}
+              key={activeContact.id}
               contact={displayedContact}
               className={"contact-edit-info"}
             />
@@ -131,15 +135,34 @@ function MyContacts() {
               }}
               onSubmit={(e) => {
                 e.preventDefault();
+                let img = null;
+                switch (contactsAdded % 4) {
+                  case 0:
+                    img = brandColor400;
+                    break;
+
+                  case 1:
+                    img = brandColor500;
+                    break;
+                  case 2:
+                    img = brandColor600;
+                    break;
+                  case 3:
+                    img = brandColor700;
+                    break;
+                  default:
+                    break;
+                }
                 const id = crypto.randomUUID();
                 contacts.length
                   ? setContacts([
                       ...contacts,
-                      { ...formText, id: id, img: brand700 },
+                      { ...formText, id: id, img: img },
                     ])
-                  : setContacts([{ ...formText, id: id, img: brand700 }]);
-                setActiveContact({ ...formText, id: id, img: brand700 });
+                  : setContacts([{ ...formText, id: id, img: img }]);
+                setActiveContact({ ...formText, id: id, img: img });
                 setFormText(emptyContact);
+                setContactsAdded(contactsAdded + 1);
                 setMode("watch");
               }}
             />

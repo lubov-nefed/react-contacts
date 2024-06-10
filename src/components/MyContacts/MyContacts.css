@@ -1,7 +1,7 @@
 .my-contacts-wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 2fr .5fr;
+  grid-template-rows: 256px 512px 80px;
   gap: 8px;
 }
 .section {

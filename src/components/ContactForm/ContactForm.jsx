@@ -1,10 +1,8 @@
 import "./ContactForm.css";
 import { Button } from "../Button/Button.jsx";
 import { Input } from "../Input/Input.jsx";
-//import { useState } from "react";
 
 function ContactForm({ onSubmit, onReset, type, formText, onChange }) {
-  //const [contactsAdded, setContactsAdded] = useState(0);
   return (
     <form onSubmit={onSubmit} onReset={onReset}>
       {type === "edit" && (
