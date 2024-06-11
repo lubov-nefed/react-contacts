@@ -70,7 +70,7 @@ function MyContacts() {
           <>
             <p>Contacts List is empty.</p>
             <button
-              className={"primary-btn"}
+              className={"primary-btn reset-list-btn"}
               onClick={() => {
                 setContacts(initialContacts);
                 setActiveContact(initialContacts[0]);
@@ -140,7 +140,6 @@ function MyContacts() {
                   case 0:
                     img = brandColor400;
                     break;
-
                   case 1:
                     img = brandColor500;
                     break;
@@ -151,19 +150,21 @@ function MyContacts() {
                     img = brandColor700;
                     break;
                   default:
+                    img = brandColor700;
                     break;
                 }
                 const id = crypto.randomUUID();
+                const newContact = { ...formText, id: id, img: img };
                 contacts.length
-                  ? setContacts([
-                      ...contacts,
-                      { ...formText, id: id, img: img },
-                    ])
-                  : setContacts([{ ...formText, id: id, img: img }]);
-                setActiveContact({ ...formText, id: id, img: img });
+                  ? setContacts([...contacts, newContact])
+                  : setContacts([newContact]);
+                setActiveContact(newContact);
                 setFormText(emptyContact);
                 setContactsAdded(contactsAdded + 1);
                 setMode("watch");
+              }}
+              onReset={() => {
+                setFormText(emptyContact);
               }}
             />
           </ContactEdit>

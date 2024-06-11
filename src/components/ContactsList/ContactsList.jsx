@@ -2,6 +2,19 @@ import "./ContactsList.css";
 import { Avatar } from "../Avatar/Avatar.jsx";
 import { Button } from "../Button/Button.jsx";
 
+function ContactListItem({ contact, children, activeContact, onClick }) {
+  return (
+    <li
+      className={
+        contact.id === activeContact.id ? "contact-li--active" : "contact-li"
+      }
+      onClick={onClick}
+    >
+      {children}
+    </li>
+  );
+}
+
 function ContactsList({
   contacts,
   activeContact,
@@ -14,13 +27,10 @@ function ContactsList({
     <section className={className}>
       <ul>
         {contacts.map((contact) => (
-          <li
-            className={
-              contact.name === activeContact.name
-                ? "contact-li--active"
-                : "contact-li"
-            }
+          <ContactListItem
             key={contact.id}
+            contact={contact}
+            activeContact={activeContact}
             onClick={() => onPick(contact)}
           >
             <Avatar img={contact.img} />
@@ -47,7 +57,19 @@ function ContactsList({
             >
               Delete
             </Button>
-          </li>
+          </ContactListItem>
+
+          /*  <li
+            className={
+              contact.name === activeContact.name
+                ? "contact-li--active"
+                : "contact-li"
+            }
+            key={contact.id}
+            onClick={() => onPick(contact)}
+          >
+            
+          </li> */
         ))}
       </ul>
     </section>
