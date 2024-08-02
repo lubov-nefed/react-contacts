@@ -27,6 +27,25 @@ function MyContacts() {
   const [mode, setMode] = useState("watch"); //edit, add
   const [contactsAdded, setContactsAdded] = useState(0);
 
+  const resetFormText = () => {
+    setFormText(emptyContact);
+  };
+
+  const createContactImg = (contactsAdded) => {
+    switch (contactsAdded % 4) {
+      case 0:
+        return brandColor400;
+      case 1:
+        return brandColor500;
+      case 2:
+        return brandColor600;
+      case 3:
+        return brandColor700;
+      default:
+        return brandColor700;
+    }
+  };
+
   return (
     <>
       <Heading level={2} className={"section-heading"}>
@@ -41,7 +60,6 @@ function MyContacts() {
               className={"section contact-info"}
             />
             <ContactsList
-              className={"section contacts-list"}
               contacts={contacts}
               activeContact={activeContact}
               onPick={(contact) => {
@@ -106,12 +124,12 @@ function MyContacts() {
                 e.preventDefault();
                 setContacts(
                   contacts.map((contact) => {
-                    if (formText.id === contact.id) {
-                      return formText;
+                    if (displayedContact.id === contact.id) {
+                      return displayedContact;
                     } else return contact;
                   })
                 );
-                setActiveContact(formText);
+                setActiveContact(displayedContact);
                 setMode("watch");
               }}
               onReset={() => {
@@ -135,37 +153,18 @@ function MyContacts() {
               }}
               onSubmit={(e) => {
                 e.preventDefault();
-                let img = null;
-                switch (contactsAdded % 4) {
-                  case 0:
-                    img = brandColor400;
-                    break;
-                  case 1:
-                    img = brandColor500;
-                    break;
-                  case 2:
-                    img = brandColor600;
-                    break;
-                  case 3:
-                    img = brandColor700;
-                    break;
-                  default:
-                    img = brandColor700;
-                    break;
-                }
+                let img = createContactImg(contactsAdded);
+                setContactsAdded(contactsAdded + 1);
                 const id = crypto.randomUUID();
                 const newContact = { ...formText, id: id, img: img };
                 contacts.length
                   ? setContacts([...contacts, newContact])
                   : setContacts([newContact]);
                 setActiveContact(newContact);
-                setFormText(emptyContact);
-                setContactsAdded(contactsAdded + 1);
+                resetFormText();
                 setMode("watch");
               }}
-              onReset={() => {
-                setFormText(emptyContact);
-              }}
+              onReset={resetFormText}
             />
           </ContactEdit>
         )}
@@ -173,7 +172,7 @@ function MyContacts() {
           className={"primary-btn add-contact-btn"}
           isDisabled={mode === "add"}
           onClick={() => {
-            setFormText(emptyContact);
+            resetFormText();
             setMode("add");
           }}
         >

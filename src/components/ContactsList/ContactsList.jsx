@@ -1,8 +1,25 @@
 import "./ContactsList.css";
 import { Avatar } from "../Avatar/Avatar.jsx";
 import { Button } from "../Button/Button.jsx";
+import { useState } from "react";
+import { alphabet } from "./alphabet.js";
+import chevronDown from "../../assets/images/icons/chevron-down.svg";
 
-function ContactListItem({ contact, children, activeContact, onClick }) {
+function AlphabetBtns({ onClick }) {
+  return (
+    <ul className="alphabet-list">
+      {alphabet.map((letter) => (
+        <li key={letter}>
+          <Button className={"secondary-btn letter-btn"} onClick={onClick}>
+            {letter}
+          </Button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function ContactsListItem({ contact, children, activeContact, onClick }) {
   return (
     <li
       className={
@@ -15,19 +32,21 @@ function ContactListItem({ contact, children, activeContact, onClick }) {
   );
 }
 
-function ContactsList({
-  contacts,
-  activeContact,
-  onPick,
-  onEdit,
-  onDelete,
-  className,
-}) {
+function ContactsList({ contacts, activeContact, onPick, onEdit, onDelete }) {
+  const [showAbc, setShowAbc] = useState(false);
   return (
-    <section className={className}>
+    <section className={"section contacts-list"}>
+      <Button
+        className={"primary-btn abc-filter-btn"}
+        onClick={() => setShowAbc(!showAbc)}
+        icon={chevronDown}
+      >
+        A-Z
+      </Button>
+      {showAbc && <AlphabetBtns onClick={() => setShowAbc(false)} />}
       <ul>
         {contacts.map((contact) => (
-          <ContactListItem
+          <ContactsListItem
             key={contact.id}
             contact={contact}
             activeContact={activeContact}
@@ -57,19 +76,7 @@ function ContactsList({
             >
               Delete
             </Button>
-          </ContactListItem>
-
-          /*  <li
-            className={
-              contact.name === activeContact.name
-                ? "contact-li--active"
-                : "contact-li"
-            }
-            key={contact.id}
-            onClick={() => onPick(contact)}
-          >
-            
-          </li> */
+          </ContactsListItem>
         ))}
       </ul>
     </section>

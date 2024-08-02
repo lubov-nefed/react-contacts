@@ -6,6 +6,7 @@ function Button({
   className,
   onClick,
   type = "button",
+  icon,
 }) {
   return (
     <button
@@ -15,6 +16,7 @@ function Button({
       type={type}
     >
       {children}
+      {icon && <img className="btn-icon" src={icon} alt="" />}
     </button>
   );
 }

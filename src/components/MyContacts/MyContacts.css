@@ -1,9 +1,38 @@
 .my-contacts-wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 256px 512px 80px;
+  grid-template-columns: repeat(2, 552px);
+  grid-template-rows: 256px 504px 80px;
   gap: 8px;
+  @media screen and (min-width: 1200px) {
+     
+    
+    }
+    
+    @media screen and (max-width: 1199px) and (min-width: 700px){
+     
+    }
+    
+    @media screen and (max-width: 699px) and (min-width: 400px){
+     
+    }
+    @media screen and (max-width: 399px) {
+    } 
 }
+
+/* 
+@media screen and (min-width: 1200px) {
+   
+  }
+  
+  @media screen and (max-width: 1199px) and (min-width: 700px){
+   
+  }
+  
+  @media screen and (max-width: 699px) and (min-width: 400px){
+   
+  }
+  @media screen and (max-width: 399px) {
+  } */
 .section {
   padding: 16px 8px;
   border: solid 1px var(--neutral-color-100);
